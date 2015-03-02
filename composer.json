@@ -1,6 +1,6 @@
 {
     "name": "vtacius/ldappm",
-    "description": "Librería para acceso y manipulación de LDAP"
+    "description": "Librería para acceso y manipulación de LDAP",
     "license": "MIT",
     "keywords": ["LDAP"],
     "require": {
