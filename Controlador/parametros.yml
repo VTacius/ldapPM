@@ -1,0 +1,80 @@
+ldapPM:
+    solo_default: false
+    acceso_db:
+        dbname: agenlad_dev
+        user: agenlad_dev
+        password: agenlad_dev
+        host: 10.10.20.56
+        driver: pdo_mysql
+    servidores:
+        default:
+            servidor: 192.168.2.10
+            puerto: 389
+            timeout: 3
+            base: dc=sv
+            admin:
+                dn: cn=admin,dc=hacienda,dc=gob,dc=sv 
+                contrasenia: lector_ldap_hacienda
+            lector:
+                dn: cn=lector,dc=hacienda,dc=gob,dc=sv 
+                contrasenia: lector_ldap_hacienda
+            configuracion:
+                base_ldap: dc=hacienda,dc=gob,dc=sv
+                dominio_correo: salud.gob.sv
+                mover_en_ou: true
+                sambaSID: S-1-5-21-592097927-1857973566-3894485130
+                sambaGroupType: 4
+                min_ldap_id: 1005
+                base:
+                    shadowAccount: ou=Users,dc=hacienda,dc=gob,dc=sv
+                    organizationalUnit: ou=Users,dc=hacienda,dc=gob,dc=sv
+                    sambaGroupMapping: ou=Groups,dc=hacienda,dc=gob,dc=sv
+        hacienda.gob.sv:
+            servidor: 192.168.2.10
+            puerto: 389
+            timeout: 3
+            base: dc=sv
+            admin:
+                dn: cn=admin,dc=hacienda,dc=gob,dc=sv 
+                contrasenia: lector_ldap_hacienda
+            lector:
+                dn: cn=lector,dc=hacienda,dc=gob,dc=sv 
+                contrasenia: lector_ldap_hacienda
+            configuracion:
+                base_ldap: dc=hacienda,dc=gob,dc=sv
+                dominio_correo: salud.gob.sv
+                mover_en_ou: true
+                sambaSID: S-1-5-21-592097927-1857973566-3894485130
+                sambaGroupType: 4
+                min_ldap_id: 1005
+                base:
+                    shadowAccount: ou=Users,dc=hacienda,dc=gob,dc=sv
+                    organizationalUnit: ou=Users,dc=hacienda,dc=gob,dc=sv
+                    sambaGroupMapping: ou=Groups,dc=hacienda,dc=gob,dc=sv
+        donaciones.gob.sv:
+            servidor: 192.168.2.14
+            puerto: 389
+            timeout: 3
+            base: dc=donaciones,dc=gob,dc=sv
+            admin:
+                dn: cn=admin,dc=donaciones,dc=gob,dc=sv
+                contrasenia: lector_ldap_hacienda
+            lector:
+                dn: cn=lector,dc=cobros,dc=gob,dc=sv 
+                contrasenia: lector_ldap_hacienda
+            configuracion:
+                base_ldap: dc=donaciones,dc=gob,dc=sv
+                dominio_correo: salud.gob.sv
+                mover_en_ou: true
+                sambaSID: S-1-5-21-592097927-1857973566-3894485130
+                min_gidNumber: 1005
+                base:
+                    shadowAccount: ou=Users,dc=donaciones,dc=gob,dc=sv
+                    organizationalUnit: dc=donaciones,dc=gob,dc=sv
+                    sambaGroupMapping: ou=Groups,dc=hacienda,dc=gob,dc=sv
+            
+                        
+             
+            
+            
+

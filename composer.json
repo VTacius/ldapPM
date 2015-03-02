@@ -1,0 +1,17 @@
+{
+    "name": "vtacius/ldappm",
+    "description": "Librería para acceso y manipulación de LDAP"
+    "license": "MIT",
+    "keywords": ["LDAP"],
+    "require": {
+	"doctrine/dbal": "~2.5",
+        "symfony/yaml": "~2.5.5",
+    },
+    "authors": [
+        {
+            "name": "Alexander Ortiz",
+            "email": "vtacius@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}
