@@ -5,7 +5,7 @@
     "keywords": ["LDAP"],
     "require": {
 	"doctrine/dbal": "~2.5",
-        "symfony/yaml": "~2.5.5",
+        "symfony/yaml": "~2.5.5"
     },
     "authors": [
         {
