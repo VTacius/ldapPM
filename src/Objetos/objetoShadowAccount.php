@@ -8,8 +8,8 @@
 namespace LdapPM\Objetos;
 
 class objetoShadowAccount extends \LdapPM\Objetos\objetosLdap{
-    public function __construct($destino, $usuario, $password = false) {
-        parent::__construct($destino, $usuario, $password);
+    public function conectar($destino, $usuario, $password = false) {
+        parent::conectar($destino, $usuario, $password);
         $this->objeto='shadowAccount';   
         $this->attrObligatorios = array('uid','uidNumber','userPassword', 'sn','cn', 'homeDirectory', 'gidNumber');
         $this->atributos = array('cn','displayName','dn','gecos','gidNumber', 'givenName','homeDirectory','loginShell','mail','o','objectClass','ou','postalAddress', 'shadowLastChange','shadowMax','shadowMin', 'sn','telephoneNumber','title','uid','uidNumber','userPassword');

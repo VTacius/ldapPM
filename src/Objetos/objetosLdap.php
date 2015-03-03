@@ -96,8 +96,8 @@ abstract class objetosLdap extends \LdapPM\Controlador\ldapOperations{
      * @param string $usuario
      * @param string $password
      */
-    public function __construct($destino, $usuario, $password = false) {
-        parent::__construct($destino, $usuario, $password);
+    public function conectar($destino, $usuario, $password = false) {
+        parent::conectar($destino, $usuario, $password);
         $this->destino = $destino;
         $this->usuario = $usuario;
         $this->password = $password;

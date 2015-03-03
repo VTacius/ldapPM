@@ -10,6 +10,13 @@ use ErrorException;
 
 class ldapAccess {
     /**
+     * Ruta del fichero que contiene la configuración 
+     * @var string fichero
+     */
+    protected $fichero;
+
+
+    /**
      * La conexión que se realiza de LDAP. Es el único resultado que vale la pena tener acá
      * @var ldap link
      */
@@ -116,11 +123,12 @@ class ldapAccess {
     /**
      * Recoge la configuracion del dominio dado
      * @param string $destino
+     * @param string $fichero
      * @return array
      */
-    protected function obtenerConfiguracionDominio($destino){
+    protected function obtenerConfiguracionDominio($destino, $fichero){
         $yaml = new \Symfony\Component\Yaml\Parser();
-        $valor = $yaml->parse(file_get_contents(__DIR__ . '/parametros.yml')); 
+        $valor = $yaml->parse(file_get_contents($fichero)); 
         $parametros = $valor['ldapPM'];
         if ($parametros['solo_default']) {
             // TODO: Implemetar esto
@@ -130,18 +138,21 @@ class ldapAccess {
     }
 
     /**
-     * Obtiene las credenciales de algun usuario dentro de la configuracion
+     * Obtiene las credenciales de algun usuario dentro de la configuracion si el $password 
+     * no fue pasado como parametro
      * @param string $destino
-     * @param string $rol
+     * @param string $fichero
+     * @param string $usuario
+     * @param string password
      * @return array
      */
-    protected function obtenerCredencialesAdministrativas($destino, $usuario, $password){
+    protected function obtenerCredencialesAdministrativas($destino, $fichero, $usuario, $password){
         if (!$password) {
             $yaml = new \Symfony\Component\Yaml\Parser();
-            $valor = $yaml->parse(file_get_contents(__DIR__ . '/parametros.yml')); 
+            $valor = $yaml->parse(file_get_contents($fichero)); 
             $parametros = $valor['ldapPM'];
             if ($parametros['solo_default']) {
-                // TODO: Implemetar esto
+                // TODO: Implementar esto
             }else{
                 return $parametros['servidores'][$destino][$usuario];
             }
@@ -155,12 +166,13 @@ class ldapAccess {
      * Obtiene la configuración para acceder a los servidores LDAP desde la base de datos
      * o el archivo YAML
      * @param string $destino
+     * @param string $fichero
      * @return array 
      */
-    protected function obtenerParametrosConexion($destino){
+    protected function obtenerParametrosConexion($destino, $fichero){
         // Obtenemos la configuracion para acceder desde el archivo
         $yaml = new \Symfony\Component\Yaml\Parser();
-        $valor = $yaml->parse(file_get_contents(__DIR__ . '/parametros.yml')); 
+        $valor = $yaml->parse(file_get_contents($fichero)); 
         $parametros = $valor['ldapPM'];
         if ($parametros['solo_default']) {
             $conexion_parametros = $parametros['acceso_db'];
@@ -184,14 +196,19 @@ class ldapAccess {
      * @return boolean
      * @throws Exception
      */
-    public function __construct($destino, $usuario, $password = false) {
-        $parametros = $this->obtenerParametrosConexion($destino);
+    public function __construct($fichero) {
+        $this->fichero = $fichero;
+    }
+    
+    public function conectar($destino, $usuario, $password = false){
         
-        $credenciales = $this->obtenerCredencialesAdministrativas($destino, $usuario, $password);
+        $parametros = $this->obtenerParametrosConexion($destino, $this->fichero);
         
-        $this->cfgDominio = $this->obtenerConfiguracionDominio($destino);
+        $this->cfgDominio = $this->obtenerConfiguracionDominio($destino, $this->fichero);       
         
         $this->conexionLdap = ldap_connect($parametros['servidor'],  $parametros['puerto']);
+        
+        $credenciales = $this->obtenerCredencialesAdministrativas($destino, $this->fichero, $usuario, $password);
         
         ldap_set_option($this->conexionLdap, LDAP_OPT_PROTOCOL_VERSION, 3);
         ldap_set_option($this->conexionLdap, LDAP_OPT_NETWORK_TIMEOUT, $parametros['timeout']);
@@ -209,7 +226,6 @@ class ldapAccess {
             $this->configurarErrorLdap('Error en conexion', $e->getMessage());
             $this->isAuth =  FALSE;
         } 
-
     }
 
 }

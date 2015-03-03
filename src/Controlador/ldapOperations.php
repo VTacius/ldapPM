@@ -8,8 +8,8 @@ namespace LdapPM\Controlador;
 use ErrorException;
 
 class ldapOperations extends \LdapPM\Controlador\ldapAccess {
-    public function __construct($destino, $usuario, $password = false) {
-        parent::__construct($destino, $usuario, $password);
+    public function conectar($destino, $usuario, $password = false) {
+        parent::conectar($destino, $usuario, $password);
         $this->objeto = 'ldapOperations';
     }
 

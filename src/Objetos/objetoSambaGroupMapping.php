@@ -8,8 +8,8 @@ namespace LdapPM\Objetos;
 
 class objetoSambaGroupMapping extends \LdapPM\Objetos\objetosLdap{
     
-    public function __construct($destino, $usuario, $password = false) {
-        parent::__construct($destino, $usuario, $password);
+    public function conectar($destino, $usuario, $password = false) {
+        parent::conectar($destino, $usuario, $password);
         $this->objeto='sambaGroupMapping';   
         $this->attrObligatorios = array('cn', 'gidNumber', 'sambaSID', 'sambaGroupType');
         $this->atributos = array('cn', 'gidNumber', 'memberUid', 'description', 'sambaSID', 'sambaGroupType', 'displayName');

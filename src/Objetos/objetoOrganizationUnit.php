@@ -7,8 +7,8 @@
  */
 namespace LdapPM\Objetos;
 class objetoOrganizationUnit extends \LdapPM\Objetos\objetosLdap {
-    public function __construct($destino, $usuario, $password = false) {
-        parent::__construct($destino, $usuario, $password);
+    public function conectar($destino, $usuario, $password = false) {
+        parent::conectar($destino, $usuario, $password);
         $this->objeto='organizationalUnit';   
         $this->attrObligatorios = array('ou');
         $this->atributos = array('ou', 'description');
