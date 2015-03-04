@@ -131,7 +131,7 @@ class ldapAccess {
         $valor = $yaml->parse(file_get_contents($fichero)); 
         $parametros = $valor['ldapPM'];
         if ($parametros['solo_default']) {
-            // TODO: Implemetar esto
+            // TODO: Implementar esto
         }else{
             return $parametros['servidores'][$destino]['configuracion'];
         }
@@ -146,7 +146,7 @@ class ldapAccess {
      * @param string password
      * @return array
      */
-    protected function obtenerCredencialesAdministrativas($destino, $fichero, $usuario, $password){
+    protected function obtenerCredenciales($destino, $fichero, $usuario, $password){
         if (!$password) {
             $yaml = new \Symfony\Component\Yaml\Parser();
             $valor = $yaml->parse(file_get_contents($fichero)); 
@@ -208,7 +208,7 @@ class ldapAccess {
         
         $this->conexionLdap = ldap_connect($parametros['servidor'],  $parametros['puerto']);
         
-        $credenciales = $this->obtenerCredencialesAdministrativas($destino, $this->fichero, $usuario, $password);
+        $credenciales = $this->obtenerCredenciales($destino, $this->fichero, $usuario, $password);
         
         ldap_set_option($this->conexionLdap, LDAP_OPT_PROTOCOL_VERSION, 3);
         ldap_set_option($this->conexionLdap, LDAP_OPT_NETWORK_TIMEOUT, $parametros['timeout']);

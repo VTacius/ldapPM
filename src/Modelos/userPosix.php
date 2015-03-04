@@ -13,7 +13,7 @@ class userPosix extends \LdapPM\Objetos\objetoShadowAccount{
     private $letras = array('a','b','c','d','e','f','g','h','i','j','k','l','m','n','ñ','o', 'p','q','r','s','t','u','v','w','x','y','z','_','.','1','2','3','4','5','6','7','8','9','0');
     
 //    private $mailDomain;
-    
+  
     public function __construct($rdnLDAP, $passLDAP, $destino="", $parametros = array()) {
         parent::__construct($rdnLDAP, $passLDAP, $destino, $parametros);
         // Usamos desde acá la clase cifrado. 

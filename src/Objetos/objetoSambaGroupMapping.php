@@ -1,7 +1,6 @@
 <?php
 /**
- * Description of objetoSambaGroupMapping
- *
+ * @name objetoSambaGroupMapping
  * @author vtacius
  */
 namespace LdapPM\Objetos;
